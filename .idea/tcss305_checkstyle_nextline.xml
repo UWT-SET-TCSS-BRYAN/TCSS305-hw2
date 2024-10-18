@@ -5,9 +5,9 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: TCSS 305 Next Line Style
-    Description: 
-The "braces on next line" style for Autumn 2022 TCSS 305.
+    Checkstyle-Configuration: TCSS 305 Same Line Style
+    Description:
+The "braces on same line" style for Autumn 2022 TCSS 305.
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
@@ -16,18 +16,13 @@ The "braces on next line" style for Autumn 2022 TCSS 305.
     <property name="max" value="95"/>
   </module>
   <module name="TreeWalker">
-    <module name="JavadocStyle"/>
-    <module name="JavadocType">
-      <property name="authorFormat" value=".+"/>
-      <property name="versionFormat" value=".+"/>
-    </module>
     <module name="JavadocVariable"/>
     <module name="MissingJavadocType"/>
     <module name="MissingJavadocMethod"/>
+    <module name="MissingJavadocPackage"/>
 
     <module name="JavadocStyle">
       <property name="scope" value="public"/>
-      <property name="excludeScope" value="package"/>
     </module>
     <module name="JavadocType">
       <property name="authorFormat" value=".+"/>
@@ -58,7 +53,7 @@ The "braces on next line" style for Autumn 2022 TCSS 305.
       <message key="name.invalidPattern" value="Package name ''{0}'' must be all lower case and not contain numbers."/>
     </module>
     <module name="ParameterName">
-      <property name="format" value="(the[A-Z]+[a-zA-Z0-9]*$)|(^[a-z][a-zA-Z0-9]*[0-9]$)"/>
+      <property name="format" value="(the[A-Z]+[a-zA-Z0-9]*$)|(^(?!my)[a-z][a-zA-Z0-9]*[0-9]$)"/>
       <message key="name.invalidPattern" value="Method parameter ''{0}'' must contain only letters and numbers and must either start with &quot;the&quot; and then use camelCase thereafter, or start with a lower case letter and end with &quot;X&quot; (where X is a digit)."/>
     </module>
     <module name="TypeName">
@@ -129,12 +124,10 @@ The "braces on next line" style for Autumn 2022 TCSS 305.
     <module name="AvoidNestedBlocks"/>
     <module name="EmptyBlock"/>
     <module name="LeftCurly">
-      <property name="option" value="nl"/>
+      <property name="option" value="eol"/>
     </module>
     <module name="NeedBraces"/>
-    <module name="RightCurly">
-      <property name="option" value="alone"/>
-    </module>
+    <module name="RightCurly"/>
     <module name="CovariantEquals"/>
     <module name="DefaultComesLast"/>
     <module name="DeclarationOrder"/>
@@ -158,9 +151,6 @@ The "braces on next line" style for Autumn 2022 TCSS 305.
     </module>
     <module name="MissingSwitchDefault"/>
     <module name="ModifiedControlVariable"/>
-    <module name="MultipleStringLiterals">
-      <property name="ignoreOccurrenceContext" value="STATIC_INIT,ANNOTATION"/>
-    </module>
     <module name="MultipleVariableDeclarations">
       <message key="multiple.variable.declarations" value="Only one variable definition allowed per line."/>
     </module>
@@ -227,12 +217,13 @@ The "braces on next line" style for Autumn 2022 TCSS 305.
     <module name="InnerTypeLast">
       <message key="arrangement.members.before.inner" value="Inner classes should be declared after all fields and methods."/>
     </module>
-    <module name="LocalFinalVariableName">
-      <message key="name.invalidPattern" value="Local final variable ''{0}'' must start with a lower case letter and contain only letters and numbers."/>
-    </module>
     <module name="LocalVariableName">
       <message key="name.invalidPattern" value="Local variable ''{0}'' must start with a lower case letter and contain only letters and numbers."/>
     </module>
+    <module name="LocalFinalVariableName">
+      <message key="name.invalidPattern" value="Local final variable ''{0}'' must start with a lower case letter and contain only letters and numbers."/>
+    </module>
+    <module name="MissingOverride"/>
     <module name="CyclomaticComplexity"/>
   </module>
   <module name="FileLength">
