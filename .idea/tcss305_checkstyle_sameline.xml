@@ -16,13 +16,15 @@ The "braces on same line" style for Autumn 2022 TCSS 305.
     <property name="max" value="95"/>
   </module>
   <module name="TreeWalker">
-    <module name="JavadocVariable"/>
+    <module name="JavadocVariable">
+      <property name="scope" value="public" />
+    </module>
     <module name="MissingJavadocType"/>
     <module name="MissingJavadocMethod"/>
     <module name="MissingJavadocPackage"/>
 
     <module name="JavadocStyle">
-      <property name="scope" value="public"/>
+      <property name="scope" value="public" />
     </module>
     <module name="JavadocType">
       <property name="authorFormat" value=".+"/>
@@ -151,9 +153,6 @@ The "braces on same line" style for Autumn 2022 TCSS 305.
     </module>
     <module name="MissingSwitchDefault"/>
     <module name="ModifiedControlVariable"/>
-    <module name="MultipleStringLiterals">
-      <property name="ignoreOccurrenceContext" value="STATIC_INIT,ANNOTATION"/>
-    </module>
     <module name="MultipleVariableDeclarations">
       <message key="multiple.variable.declarations" value="Only one variable definition allowed per line."/>
     </module>

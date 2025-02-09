@@ -4,7 +4,10 @@
 
 package edu.uw.tcss.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.uw.tcss.model.Human;
 import java.util.ArrayList;
@@ -28,30 +31,48 @@ public class HumanTest {
      */
     private static final int TRIES_FOR_RANDOMNESS = 50;
 
+    private static final int FIXTURE_X = 10;
+
+    private static final int FIXTURE_Y = 10;
+
+    private static final int FIXTURE_DEATH_TIME = 45;
+
     /** Test method for Human constructor. */
     @Test
     public void testHumanConstructor() {
-        final Human h = new Human(10, 11, Direction.NORTH);
+        final Human h = new Human(FIXTURE_X, FIXTURE_Y, Direction.NORTH);
 
-        assertEquals(10, h.getX(), "Human x coordinate not initialized correctly!");
-        assertEquals(11, h.getY(), "Human y coordinate not initialized correctly!");
+        assertEquals(FIXTURE_X, h.getX(),
+                "Human x coordinate not initialized correctly!");
+        assertEquals(FIXTURE_Y, h.getY(),
+                "Human y coordinate not initialized correctly!");
         assertEquals(Direction.NORTH, h.getDirection(),
                 "Human direction not initialized correctly!");
-        assertEquals(45, h.getDeathTime(), "Human death time not initialized correctly!");
-        assertTrue(h.isAlive(), "Human isAlive() fails initially!");
+        assertEquals(FIXTURE_DEATH_TIME, h.getDeathTime(),
+                "Human death time not initialized correctly!");
+        assertTrue(h.isAlive(),
+                "Human isAlive() fails initially!");
     }
 
     /** Test method for Human setters. */
     @Test
     public void testHumanSetters() {
-        final Human h = new Human(10, 11, Direction.NORTH);
+        final Human h = new Human(FIXTURE_X, FIXTURE_Y, Direction.NORTH);
 
-        h.setX(12);
-        assertEquals(12, h.getX(), "Human setX failed!");
-        h.setY(13);
-        assertEquals(13, h.getY(), "Human setY failed!");
+        final int changedX = 12;
+        final int changedY = 13;
+
+        h.setX(changedX);
+        assertEquals(changedX, h.getX(),
+                "Human setX failed!");
+
+        h.setY(changedY);
+        assertEquals(changedY, h.getY(),
+                "Human setY failed!");
+
         h.setDirection(Direction.SOUTH);
-        assertEquals(Direction.SOUTH, h.getDirection(), "Human setDirection failed!");
+        assertEquals(Direction.SOUTH, h.getDirection(),
+                "Human setDirection failed!");
     }
 
     /**
@@ -114,7 +135,7 @@ public class HumanTest {
      */
     @Test
     public void testChooseDirectionSurroundedByGrass() {
-        final Map<Direction, Terrain> neighbors = new HashMap<Direction, Terrain>();
+        final Map<Direction, Terrain> neighbors = new HashMap<>();
         neighbors.put(Direction.WEST, Terrain.GRASS);
         neighbors.put(Direction.NORTH, Terrain.GRASS);
         neighbors.put(Direction.EAST, Terrain.GRASS);
@@ -130,15 +151,11 @@ public class HumanTest {
         for (int count = 0; count < TRIES_FOR_RANDOMNESS; count++) {
             final Direction d = human.chooseDirection(neighbors);
 
-            if (d == Direction.WEST) {
-                seenWest = true;
-            } else if (d == Direction.NORTH) {
-                seenNorth = true;
-            } else if (d == Direction.EAST) {
-                seenEast = true;
-            } else if (d == Direction.SOUTH) { // this should NOT be chosen
-                seenSouth = true;
-            }
+            seenNorth = seenNorth || d == Direction.NORTH;
+            seenSouth = seenSouth || d == Direction.SOUTH;
+            seenWest = seenWest || d == Direction.WEST;
+            seenEast = seenEast || d == Direction.EAST;
+
         }
 
         assertTrue(seenWest && seenNorth && seenEast,
@@ -159,7 +176,7 @@ public class HumanTest {
         for (final Terrain t : Terrain.values()) {
             if (t != Terrain.GRASS && t != Terrain.CROSSWALK) {
 
-                final Map<Direction, Terrain> neighbors = new HashMap<Direction, Terrain>();
+                final Map<Direction, Terrain> neighbors = new HashMap<>();
                 neighbors.put(Direction.WEST, t);
                 neighbors.put(Direction.NORTH, t);
                 neighbors.put(Direction.EAST, t);
@@ -190,7 +207,7 @@ public class HumanTest {
 
         final Human human = new Human(0, 0, Direction.NORTH);
 
-        final Map<Direction, Terrain> neighbors = new HashMap<Direction, Terrain>();
+        final Map<Direction, Terrain> neighbors = new HashMap<>();
         neighbors.put(Direction.WEST, Terrain.CROSSWALK);
         neighbors.put(Direction.NORTH, Terrain.GRASS);
         neighbors.put(Direction.EAST, Terrain.GRASS);
