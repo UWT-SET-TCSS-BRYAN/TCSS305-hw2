@@ -2,14 +2,11 @@
  * TCSS 305 - Road Rage
  */
 
-package edu.uw.tcss.app;
+package edu.uw.tcss.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.uw.tcss.model.Direction;
 import edu.uw.tcss.model.Human;
-import edu.uw.tcss.model.Light;
-import edu.uw.tcss.model.Terrain;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
